@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/Middleware-front/static/css/main.22b9fb75.css",
+    "main.js": "/Middleware-front/static/js/main.e78d8d47.js",
+    "static/js/453.3c8d5d92.chunk.js": "/Middleware-front/static/js/453.3c8d5d92.chunk.js",
+    "static/media/imgloginpage.png": "/Middleware-front/static/media/imgloginpage.b5282b730e2b963bbfdc.png",
+    "static/media/loginlogo.png": "/Middleware-front/static/media/loginlogo.031d22167174d2cb2d01.png",
+    "static/media/create.png": "/Middleware-front/static/media/create.416385867c5ce65dca9d.png",
+    "index.html": "/Middleware-front/index.html",
+    "main.22b9fb75.css.map": "/Middleware-front/static/css/main.22b9fb75.css.map",
+    "main.e78d8d47.js.map": "/Middleware-front/static/js/main.e78d8d47.js.map",
+    "453.3c8d5d92.chunk.js.map": "/Middleware-front/static/js/453.3c8d5d92.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.22b9fb75.css",
+    "static/js/main.e78d8d47.js"
+  ]
+}
