@@ -103,7 +103,7 @@ const LoginPage = () => {
 
                             <div className="text-black mt-5">
                                 <p>
-                                    Don't you have an account? <Link to="/Middleware-front/signup" className="text-blue-600">Create account</Link>
+                                    Don't you have an account? <Link to="/signup" className="text-blue-600">Create account</Link>
                                 </p>
                             </div>
                         </form>

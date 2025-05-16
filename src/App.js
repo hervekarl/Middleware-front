@@ -9,13 +9,13 @@ function App() {
   const isProduction = process.env.NODE_ENV === 'production';
 
   return (
-    <Router basename={isProduction ? "/Middleware-front" : "/"}>
+    <Router >
       <Routes>
         {/* Route racine */}
-        <Route path="Middleware-front" element={<LoginPage />} />
+        <Route path="" element={<LoginPage />} />
         
         {/* Route /signup */}
-        <Route path="Middleware-front/signup" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </Router>
   );
