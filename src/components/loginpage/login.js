@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import imglogin from "../../images/imgloginpage.png";
 import logologin from "../../images/loginlogo.png";
 import { Avatar } from '@mui/material';
-import { Link } from 'react-router-dom';
-
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import { useEffect } from "react";
 
 
 const LoginPage = () => {
+    const [theme, setTheme] = useState("light");
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prev => (prev === "light" ? "dark" : "light"));
+    };
+
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -30,7 +41,20 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            setShowModal(true);
+            // Simulation de vérification des identifiants
+            // En réalité, vous feriez une requête API ici
+            if (formData.username === "admin" && formData.password === "password") {
+                // setShowModal(true);
+                // Redirection après 2 secondes (pour voir le message de succès)
+                setTimeout(() => {
+                    navigate('/home'); // Redirection vers la page d'accueil
+                }, 1000);
+            } else {
+                setErrors({
+                    username: 'Invalid credentials',
+                    password: 'Invalid credentials'
+                });
+            }
         }
     };
 
@@ -47,24 +71,17 @@ const LoginPage = () => {
     };
 
 
-    const [theme, setTheme] = useState("light");
-
-    useEffect(() => {
-        document.documentElement.setAttribute("data-theme", theme);
-    }, [theme]);
-
-    const toggleTheme = () => {
-        setTheme(prev => (prev === "light" ? "dark" : "light"));
-    };
-
     return (
         <div className="flex flex-col h-screen overflow-hidden">
+            <button onClick={toggleTheme} className="btn btn-primary fixed top-4 right-4 z-50">
+                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+            </button>
             {/* Titre fixe en haut */}
             <div className="bg-blue-800 w-full py-3 text-white font-bold text-center sticky top-0 z-10">
                 <h1>Login here</h1>
             </div>
 
-            
+
             {/* Contenu scrollable */}
             <div className="flex-1 overflow-y-auto h-full w-full">
                 <section className="flex flex-col md:flex-row h-full">

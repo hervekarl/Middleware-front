@@ -3,6 +3,7 @@ import LoginPage from './components/loginpage/login';
 import SignUp from './components/loginpage/signup';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ThemeToggle from './components/Theme/darkLight';
+import HomePage from './components/pages/home';
 
 function App() {
   // Détermine si on est en production (GitHub Pages)
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         {/* Route racine */}
         <Route path="" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
         
         {/* Route /signup */}
         <Route path="/signup" element={<SignUp />} />

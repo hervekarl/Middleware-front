@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import createimg from "../../images/create.png";
 import { Avatar } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
+
+    const [theme, setTheme] = useState("light");
+
+    const toggleTheme = () => {
+        setTheme(prev => (prev === "light" ? "dark" : "light"));
+    }
+
+    useEffect(() => {
+        document.documentElement.setAttribute("data-theme", theme);
+    }, [theme]);
+
     const [formData, setFormData] = useState({
         name: '',
         lastname: '',
@@ -95,7 +106,10 @@ const SignUp = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen overflow-hidden bg-gray-50 w-full object-cover">
+        <div className="flex flex-col h-screen overflow-hidden w-full object-cover">
+            <button onClick={toggleTheme} className="btn btn-primary fixed top-4 right-4 z-50">
+                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+            </button>
             {/* Header */}
             <div className="bg-blue-600 w-full py-3 text-white font-bold text-center sticky top-0 z-10 shadow-md">
                 <h1 className="text-xl">Create Account</h1>
