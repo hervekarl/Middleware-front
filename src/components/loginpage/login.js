@@ -66,7 +66,7 @@ const LoginPage = () => {
 
             
             {/* Contenu scrollable */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto h-full w-full">
                 <section className="flex flex-col md:flex-row h-full">
                     {/* Partie formulaire */}
                     <div className="w-full md:w-1/2 flex justify-center items-start p-4">
