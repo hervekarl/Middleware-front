@@ -17,7 +17,6 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     themes: ["light", "dark"], // tu peux aussi mettre "cupcake", "bumblebee", etc.
-    darkTheme: "light",         // thème utilisé quand `dark` est activé
     base: true,
     styled: true,
     utils: true,
