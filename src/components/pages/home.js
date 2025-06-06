@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logologin from "../../images/loginlogo.png";
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 
 const HomePage = () => {
+    useEffect(() => {
+        console.log('Home page mounted');
+        console.log('Current token:', localStorage.getItem('authToken'));
+    }, []);
     return (
         <div className="flex flex-col min-h-screen">
             {/* En-tête */}
@@ -31,8 +35,8 @@ const HomePage = () => {
                         </CardContent>
                         <CardActions>
                             <CardActions>
-                                <Button class="w-full bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
-                                   More
+                                <Button className="w-full bg-blue-800 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+                                    More
                                 </Button>
                             </CardActions>
                         </CardActions>
