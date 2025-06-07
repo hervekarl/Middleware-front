@@ -10,6 +10,12 @@ import axios from 'axios';
 import HomePatient from './components/Patient/HomePatient';
 import Apatient from './components/Patient/Apatient';
 import SavePatient from './components/Patient/SavePAtient';
+import Logout from './components/loginpage/Logout';
+import UpdatePatient from './components/Patient/UpdatePatient';
+import HomePersonnel from './components/Personnels/HomePersonnel';
+import Apersonnel from './components/Personnels/Apersonnel';
+import SavePersonnel from './components/Personnels/SavePersonnel';
+import UpdatePersonnel from './components/Personnels/UpdatePersonnel';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
@@ -51,11 +57,22 @@ function App() {
         {/* Routes protégées */}
         {/* <Route element={<ProtectedRoute isAllowed={isAuthenticated} />}> */}
 
+        {/* patients  */}
 
           <Route path="/home" element={<HomePage onLogout={handleLogout} />} />
           <Route path="/patient" element={<HomePatient onLogin={handleLogin} />} />
-          <Route path="/home/patient/:id" element={<Apatient onLogin={handleLogin}/>} />
+          <Route path="/patient/:id" element={<Apatient onLogin={handleLogin}/>} />
           <Route path="/patient/create" element={<SavePatient onLogin={handleLogin} />} />
+          <Route path="/patient/edit/:id" element={<UpdatePatient onLogin={handleLogin} />} />
+          <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
+
+          {/* personnels */}
+
+          <Route path="/personnels" element={<HomePersonnel onLogin={handleLogin} />} />
+          <Route path="/personnels/:id" element={<Apersonnel onLogin={handleLogin}/>} />
+          <Route path="/personnels/create" element={<SavePersonnel onLogin={handleLogin} />} />
+          <Route path="/personnels/edit/:id" element={<UpdatePersonnel onLogin={handleLogin} />} />
+
 
         {/* </Route> */}
         

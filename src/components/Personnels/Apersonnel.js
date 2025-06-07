@@ -2,56 +2,55 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-const Apatient = () => {
+const Apersonnel = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [patient, setPatient] = useState(null);
+    const [personnel, setPersonnel] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
     useEffect(() => {
-        const fetchPatient = async () => {
+        const fetchPersonnel = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/patient/${id}`);
+                const response = await axios.get(`http://192.168.1.186:8080/rh/employe/${id}`);
                 if (response.data) {
-                    setPatient(response.data);
+                    setPersonnel(response.data);
                 } else {
-                    setErrorMessage(`Aucun patient trouvé avec l'ID ${id}`);
+                    setErrorMessage(`Aucun personnel trouvé avec l'ID ${id}`);
                     setShowModal(true);
                 }
             } catch (error) {
                 if (error.response && error.response.status === 404) {
-                    setErrorMessage(`Aucun patient trouvé avec l'ID ${id}`);
+                    setErrorMessage(`Aucun personnel trouvé avec l'ID ${id}`);
                 } else {
                     setErrorMessage('Erreur de connexion au serveur');
                 }
                 setShowModal(true);
-                console.error('Erreur:', error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchPatient();
+        fetchPersonnel();
     }, [id]);
 
     const closeModal = () => {
         setShowModal(false);
-        navigate('/patient');
+        navigate('/personnel');
     };
 
     const handleEdit = () => {
-        navigate(`/patient/edit/${id}`);
+        navigate(`/personnel/edit/${id}`);
     };
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:8080/patient/delete/${id}`);
-            navigate('/patient');
+            await axios.delete(`http://192.168.1.186:8080/rh/employe/delete/${id}`);
+            navigate('/personnel');
         } catch (error) {
-            setErrorMessage("Erreur lors de la suppression du patient");
+            setErrorMessage("Erreur lors de la suppression du personnel");
             setShowModal(true);
         }
     };
@@ -113,7 +112,7 @@ const Apatient = () => {
                     <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
                         <div className="p-6">
                             <h3 className="text-lg font-semibold text-gray-800 mb-4">Confirmer la suppression</h3>
-                            <p className="mb-6 text-gray-700">Êtes-vous sûr de vouloir supprimer ce patient ? Cette action est irréversible.</p>
+                            <p className="mb-6 text-gray-700">Êtes-vous sûr de vouloir supprimer ce personnel ? Cette action est irréversible.</p>
                             <div className="flex justify-end space-x-2">
                                 <button
                                     onClick={() => setShowDeleteConfirm(false)}
@@ -134,31 +133,43 @@ const Apatient = () => {
             )}
 
             {/* Contenu principal */}
-            {patient ? (
+            {personnel ? (
                 <div className="flex justify-center items-start min-h-screen pt-10">
                     <div className="max-w-2xl w-full p-6 bg-white rounded-lg shadow-md">
-                        <h1 className="text-2xl font-bold text-gray-800 mb-6">Détails du Patient</h1>
+                        <h1 className="text-2xl font-bold text-gray-800 mb-6">Détails du Personnel</h1>
                         
                         <div className="space-y-4">
                             <div className="flex flex-wrap">
-                                <span className="w-1/3 font-semibold text-gray-600">ID:</span>
-                                <span className="w-2/3 text-gray-800">{patient._id || patient.id}</span>
-                            </div>
-                            <div className="flex flex-wrap">
                                 <span className="w-1/3 font-semibold text-gray-600">Nom:</span>
-                                <span className="w-2/3 text-gray-800">{patient.name || 'Non spécifié'}</span>
+                                <span className="w-2/3 text-gray-800">{personnel.nom || 'Non spécifié'}</span>
                             </div>
                             <div className="flex flex-wrap">
                                 <span className="w-1/3 font-semibold text-gray-600">Prénom:</span>
-                                <span className="w-2/3 text-gray-800">{patient.lastname || 'Non spécifié'}</span>
+                                <span className="w-2/3 text-gray-800">{personnel.prenom || 'Non spécifié'}</span>
                             </div>
                             <div className="flex flex-wrap">
-                                <span className="w-1/3 font-semibold text-gray-600">Email:</span>
-                                <span className="w-2/3 text-gray-800">{patient.email || 'Non spécifié'}</span>
+                                <span className="w-1/3 font-semibold text-gray-600">Sexe:</span>
+                                <span className="w-2/3 text-gray-800">{personnel.sexe || 'Non spécifié'}</span>
+                            </div>
+                            <div className="flex flex-wrap">
+                                <span className="w-1/3 font-semibold text-gray-600">Date de naissance:</span>
+                                <span className="w-2/3 text-gray-800">{personnel.dateNaissance || 'Non spécifié'}</span>
+                            </div>
+                            <div className="flex flex-wrap">
+                                <span className="w-1/3 font-semibold text-gray-600">Adresse:</span>
+                                <span className="w-2/3 text-gray-800">{personnel.adresse || 'Non spécifié'}</span>
                             </div>
                             <div className="flex flex-wrap">
                                 <span className="w-1/3 font-semibold text-gray-600">Téléphone:</span>
-                                <span className="w-2/3 text-gray-800">{patient.phone || patient.tel || 'Non spécifié'}</span>
+                                <span className="w-2/3 text-gray-800">{personnel.telephone || 'Non spécifié'}</span>
+                            </div>
+                            <div className="flex flex-wrap">
+                                <span className="w-1/3 font-semibold text-gray-600">Email:</span>
+                                <span className="w-2/3 text-gray-800">{personnel.email || 'Non spécifié'}</span>
+                            </div>
+                            <div className="flex flex-wrap">
+                                <span className="w-1/3 font-semibold text-gray-600">Date d'embauche:</span>
+                                <span className="w-2/3 text-gray-800">{personnel.dateEmbauche || 'Non spécifié'}</span>
                             </div>
                         </div>
 
@@ -176,7 +187,7 @@ const Apatient = () => {
                                 Supprimer
                             </button>
                             <button
-                                onClick={() => navigate('/patient')}
+                                onClick={() => navigate('/personnel')}
                                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200"
                             >
                                 Retour à la liste
@@ -195,4 +206,4 @@ const Apatient = () => {
     );
 };
 
-export default Apatient;
+export default Apersonnel;
